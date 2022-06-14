@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
+// import 'routes.dart';
+
 
 class NotifikasiScreen extends StatefulWidget {
   const NotifikasiScreen({Key? key}) : super(key: key);
@@ -27,6 +30,39 @@ class NotifikasiState extends State<NotifikasiScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
+    AnimatedButton(
+      text: 'Info Dialog fixed width and square buttons',
+      pressEvent: () {
+        AwesomeDialog(
+          context: context,
+          dialogType: DialogType.INFO_REVERSED,
+          borderSide: const BorderSide(
+            color: Colors.green,
+            width: 2,
+          ),
+          width: 400,
+          buttonsBorderRadius: const BorderRadius.all(
+            Radius.circular(2),
+          ),
+          dismissOnTouchOutside: true,
+          dismissOnBackKeyPress: false,
+          onDissmissCallback: (type) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('Dismissed by $type'),
+              ),
+            );
+          },
+          headerAnimationLoop: false,
+          animType: AnimType.BOTTOMSLIDE,
+          title: 'INFO',
+          desc: 'This Dialog can be dismissed touching outside',
+          showCloseIcon: true,
+          // btnCancelOnPress: () {},
+          btnOkOnPress: () {},
+        ).show();
+      }
+    ),
                   Container(
                     height: 20,
                   ),
@@ -72,6 +108,12 @@ class NotifikasiState extends State<NotifikasiScreen> {
                     },
                     child: const Text('Show Toast Widget'),
                   ),
+                  // ElevatedButton(
+                  //   onPressed: () async {
+                  //     _showInformationDialog();
+                  //   },
+                  //   child: const Text('Show Toast Widget'),
+                  // ),
                 ],
               ),
             ),
@@ -152,7 +194,7 @@ class NotifikasiState extends State<NotifikasiScreen> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text('Informasi'),
-          content: Text('Data karyawan berhasil tersimpan.'),
+          content: Text('Data Pengguna berhasil tersimpan.'),
           actions: <Widget>[
             TextButton(
               child: const Text('OK'),
@@ -174,5 +216,27 @@ class NotifikasiState extends State<NotifikasiScreen> {
       textStyle: TextStyle(fontSize: 16, color: Colors.white),
       backgroundColor: Colors.red,
     );
+  }
+
+
+  _showInformationDialog() async{
+    AwesomeDialog(
+      context: context,
+      dialogType: DialogType.INFO_REVERSED,
+      borderSide: const BorderSide(
+        color: Colors.green,
+        width: 2,
+      ),
+      width: 280,
+      buttonsBorderRadius: const BorderRadius.all(
+        Radius.circular(2),
+      ),
+      headerAnimationLoop: false,
+      animType: AnimType.BOTTOMSLIDE,
+      title: 'INFO',
+      desc: 'This Dialog can be dismissed touching outside',
+      showCloseIcon: true,
+      btnOkOnPress: () {},
+    ).show();
   }
 }
